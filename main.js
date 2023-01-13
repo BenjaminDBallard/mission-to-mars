@@ -19,16 +19,26 @@ class CrewMember {
     this.ship = null;
   }
   enterShip(shipName) {
+    console.log(shipName);
     this.ship = shipName;
+    shipName.crew.push(this);
   }
 }
 
-class Ship {
-  constructor(name, type, ability) {
+class Ship extends CrewMember {
+  constructor(name, type, ability, job, specialSkill) {
+    super(name, job, specialSkill);
     this.name = name;
     this.type = type;
     this.ability = ability;
     this.crew = [];
+  }
+  missionStatement() {
+    if (this.crew.length > 0) {
+      return this.ability;
+    } else {
+      return "Can't perform a mission yet.";
+    }
   }
 }
 
